@@ -13,8 +13,13 @@ module Github
     element :homepage,    String
 
     def self.user(name)
-      xml = show_repo_resource(name).get
-      parse(xml)
+      begin
+        xml = show_repo_resource(name).get
+        parse(xml)
+      rescue TypeError
+        xml = xml.body
+        parse(xml)
+      end
     end
 
     def commits(branch = "master")

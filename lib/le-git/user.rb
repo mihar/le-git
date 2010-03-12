@@ -28,7 +28,6 @@ module Github
     def self.find(username)
       begin
         xml = show_user_resource(username).get
-        puts xml.class
         parse(xml)
       rescue TypeError
         xml = xml.body
@@ -39,7 +38,6 @@ module Github
     def self.search(username)
       begin
         xml = search_user_resource(username).get
-        puts xml.class
         parse(xml)
       rescue TypeError
         xml = xml.body
