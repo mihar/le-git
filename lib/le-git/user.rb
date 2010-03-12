@@ -26,12 +26,22 @@ module Github
     element :company, String
 
     def self.find(username)
-      xml = show_user_resource(username).get.body
+      begin
+        xml = show_user_resource(username).get
+        puts xml.class
+      rescue TypeError
+        xml = xml.body
+      end
       parse(xml)
     end
 
     def self.search(username)
-      xml = search_user_resource(username).get.body
+      begin
+        xml = search_user_resource(username).get
+        puts xml.class
+      rescue TypeError
+        xml = xml.body if xml.class == RestClient::Response
+      end
       parse(xml)
     end
 
