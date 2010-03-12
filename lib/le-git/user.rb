@@ -26,12 +26,12 @@ module Github
     element :company, String
 
     def self.find(username)
-      xml = show_user_resource(username).get
+      xml = show_user_resource(username).get.body
       parse(xml)
     end
 
     def self.search(username)
-      xml = search_user_resource(username).get
+      xml = search_user_resource(username).get.body
       parse(xml)
     end
 
