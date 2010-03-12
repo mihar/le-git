@@ -29,20 +29,22 @@ module Github
       begin
         xml = show_user_resource(username).get
         puts xml.class
+        parse(xml)
       rescue TypeError
         xml = xml.body
+        parse(xml)
       end
-      parse(xml)
     end
 
     def self.search(username)
       begin
         xml = search_user_resource(username).get
         puts xml.class
+        parse(xml)
       rescue TypeError
-        xml = xml.body if xml.class == RestClient::Response
+        xml = xml.body
+        parse(xml)
       end
-      parse(xml)
     end
 
     def repositories
